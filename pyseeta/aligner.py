@@ -58,7 +58,7 @@ class Aligner(object):
         byte_model_path = model_path.encode('utf-8')
         self.aligner = align_lib.get_face_aligner(byte_model_path)
 
-    def align(self, image=None, face=None):
+    def align(self, image=None, left=None, top=None, right=None, bottom=None, score=None)):
         """
         input:\n
         @param image: a gray scale image.\n
@@ -66,7 +66,11 @@ class Aligner(object):
         output: a list of point (x,y)
         """
         assert image is not None, 'Image cannot be None'
-        assert face is not None, 'Face cannot be None'
+        assert left is not None, 'left cannot be None'
+        assert top is not None, 'top cannot be None'
+        assert right is not None, 'right cannot be None'
+        assert bottom is not None, 'bottom cannot be None'
+        assert score is not None, 'score cannot be None'
 
         # handle pillow image
         if not isinstance(image, np.ndarray):
@@ -80,11 +84,11 @@ class Aligner(object):
         image_data.data = image.ctypes.data
         # prepare face data
         face_data = _Face()
-        face_data.left   = face.left
-        face_data.top    = face.top
-        face_data.right  = face.right
-        face_data.bottom = face.bottom
-        face_data.score  = face.score
+        face_data.left   = left
+        face_data.top    = top
+        face_data.right  = right
+        face_data.bottom = bottom
+        face_data.score  = score
         # call align function
         marks_data = align_lib.align(self.aligner, byref(image_data), byref(face_data))
         # read face
