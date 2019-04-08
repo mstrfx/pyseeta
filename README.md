@@ -68,6 +68,9 @@ pip uninstall pyseeta
 ```
 
 ## Update Log
+> **v0.4.1**
+
+1. added custom bounding box that can be passed to aligner
 
 > **v0.4.0**
 
