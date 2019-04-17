@@ -58,7 +58,7 @@ class Aligner(object):
         byte_model_path = model_path.encode('utf-8')
         self.aligner = align_lib.get_face_aligner(byte_model_path)
 
-    def align(self, image=None, left=None, top=None, right=None, bottom=None, score=None)):
+    def align(self, image=None, left=None, top=None, right=None, bottom=None, score=None):
         """
         input:\n
         @param image: a gray scale image.\n
